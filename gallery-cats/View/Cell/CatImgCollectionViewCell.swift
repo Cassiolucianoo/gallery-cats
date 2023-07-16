@@ -9,7 +9,7 @@ import UIKit
 import AlamofireImage
 import Alamofire
 
-class CatImageCellCollectionViewCell: UICollectionViewCell {
+class CatImgCollectionViewCell: UICollectionViewCell {
 
     
     @IBOutlet weak var imageView: UIImageView!

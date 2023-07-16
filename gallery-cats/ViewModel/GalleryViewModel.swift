@@ -10,15 +10,12 @@
 import Foundation
 import Alamofire
 
-import Foundation
-import Alamofire
-
-class CatGalleryViewModel {
+class GalleryViewModel {
     private var catImages: [CatImage] = []
-    
-    func fetchCatImages(section: String = "hot", sort: String = "viral", window: String = "day", page: Int = 1, showViral: Bool = true, showMature: Bool = false, albumPreviews: Bool = false, completion: @escaping (Result<Void, Error>) -> Void) {
+
+    func fetchCatImages(completion: @escaping (Result<Void, Error>) -> Void) {
         let clientId = "9d32f5daf5806b6"
-        let apiUrl = "https://api.imgur.com/3/gallery/\(section)/\(sort)/\(window)/\(page)?showViral=\(showViral)&mature=\(showMature)&album_previews=\(albumPreviews)"
+        let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
 
         guard let url = URL(string: apiUrl) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
@@ -33,8 +30,13 @@ class CatGalleryViewModel {
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let response = try decoder.decode(CatGalleryResponse.self, from: data)
-                    self.catImages = response.data.compactMap { CatImage(imageUrl: $0.link) }
+                    let apiResponse = try decoder.decode(CatGalleryResponse.self, from: data)
+                    self.catImages = apiResponse.data.compactMap { imageData in
+                        if let image = imageData.images?.first, image.type == "image/jpeg" {
+                            return CatImage(link: image.link, type: image.type)
+                        }
+                        return nil
+                    }
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))
@@ -44,12 +46,12 @@ class CatGalleryViewModel {
             }
         }
     }
-    
+
     func numberOfImages() -> Int {
         return catImages.count
     }
-    
+
     func imageUrl(at index: Int) -> String {
-        return catImages[index].imageUrl
+        return catImages[index].link
     }
 }

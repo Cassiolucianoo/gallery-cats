@@ -8,10 +8,17 @@
 import Foundation
 
 
+import Foundation
+
 struct CatGalleryResponse: Codable {
     let data: [CatImageData]
 }
 
 struct CatImageData: Codable {
+    let images: [CatImage]?
+}
+
+struct CatImage: Codable {
     let link: String
+    let type: String
 }

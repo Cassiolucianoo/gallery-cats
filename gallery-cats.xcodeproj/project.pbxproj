@@ -16,12 +16,11 @@
 		DF25EF0A2A632AFC00EA8CC5 /* gallery_catsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF25EF092A632AFC00EA8CC5 /* gallery_catsTests.swift */; };
 		DF25EF142A632AFC00EA8CC5 /* gallery_catsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF25EF132A632AFC00EA8CC5 /* gallery_catsUITests.swift */; };
 		DF25EF162A632AFC00EA8CC5 /* gallery_catsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF25EF152A632AFC00EA8CC5 /* gallery_catsUITestsLaunchTests.swift */; };
-		DF588DDD2A646EB90075BD5D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF588DDC2A646EB90075BD5D /* File.swift */; };
-		DF87508C2A63325D00D14F41 /* CatGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87508B2A63325D00D14F41 /* CatGalleryViewModel.swift */; };
-		DF87508E2A63328A00D14F41 /* CatGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87508D2A63328A00D14F41 /* CatGalleryViewController.swift */; };
+		DF87508C2A63325D00D14F41 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87508B2A63325D00D14F41 /* GalleryViewModel.swift */; };
+		DF87508E2A63328A00D14F41 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87508D2A63328A00D14F41 /* GalleryViewController.swift */; };
 		DF87508F2A633CE100D14F41 /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87508A2A63322400D14F41 /* CatImage.swift */; };
 		DF8750912A633D7B00D14F41 /* CatGalleryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8750902A633D7B00D14F41 /* CatGalleryResponse.swift */; };
-		DFB724DA2A64508100AD0277 /* CatImageCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB724D82A64508100AD0277 /* CatImageCellCollectionViewCell.swift */; };
+		DFB724DA2A64508100AD0277 /* CatImgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB724D82A64508100AD0277 /* CatImgCollectionViewCell.swift */; };
 		DFB724DB2A64508100AD0277 /* CatImageCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFB724D92A64508100AD0277 /* CatImageCellCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
@@ -57,12 +56,11 @@
 		DF25EF0F2A632AFC00EA8CC5 /* gallery-catsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gallery-catsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF25EF132A632AFC00EA8CC5 /* gallery_catsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gallery_catsUITests.swift; sourceTree = "<group>"; };
 		DF25EF152A632AFC00EA8CC5 /* gallery_catsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gallery_catsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DF588DDC2A646EB90075BD5D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		DF87508A2A63322400D14F41 /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
-		DF87508B2A63325D00D14F41 /* CatGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGalleryViewModel.swift; sourceTree = "<group>"; };
-		DF87508D2A63328A00D14F41 /* CatGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGalleryViewController.swift; sourceTree = "<group>"; };
+		DF87508B2A63325D00D14F41 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		DF87508D2A63328A00D14F41 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		DF8750902A633D7B00D14F41 /* CatGalleryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGalleryResponse.swift; sourceTree = "<group>"; };
-		DFB724D82A64508100AD0277 /* CatImageCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImageCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		DFB724D82A64508100AD0277 /* CatImgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImgCollectionViewCell.swift; sourceTree = "<group>"; };
 		DFB724D92A64508100AD0277 /* CatImageCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatImageCellCollectionViewCell.xib; sourceTree = "<group>"; };
 		F6D0C4DC8F1F94AABBBA4554 /* Pods_gallery_cats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gallery_cats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,7 +141,6 @@
 				DF25EEF42A632AF900EA8CC5 /* SceneDelegate.swift */,
 				DF25EEF22A632AF900EA8CC5 /* AppDelegate.swift */,
 				DF25EF002A632AFC00EA8CC5 /* Info.plist */,
-				DF588DDC2A646EB90075BD5D /* File.swift */,
 			);
 			path = "gallery-cats";
 			sourceTree = "<group>";
@@ -168,7 +165,7 @@
 		DF588DDE2A6473B10075BD5D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DF87508B2A63325D00D14F41 /* CatGalleryViewModel.swift */,
+				DF87508B2A63325D00D14F41 /* GalleryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -185,7 +182,7 @@
 		DF588DE02A6474990075BD5D /* CatGallery */ = {
 			isa = PBXGroup;
 			children = (
-				DF87508D2A63328A00D14F41 /* CatGalleryViewController.swift */,
+				DF87508D2A63328A00D14F41 /* GalleryViewController.swift */,
 				DF25EEF82A632AF900EA8CC5 /* Main.storyboard */,
 			);
 			path = CatGallery;
@@ -203,7 +200,7 @@
 		DFB724D72A64505400AD0277 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				DFB724D82A64508100AD0277 /* CatImageCellCollectionViewCell.swift */,
+				DFB724D82A64508100AD0277 /* CatImgCollectionViewCell.swift */,
 				DFB724D92A64508100AD0277 /* CatImageCellCollectionViewCell.xib */,
 			);
 			path = Cell;
@@ -385,13 +382,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF87508C2A63325D00D14F41 /* CatGalleryViewModel.swift in Sources */,
-				DF87508E2A63328A00D14F41 /* CatGalleryViewController.swift in Sources */,
+				DF87508C2A63325D00D14F41 /* GalleryViewModel.swift in Sources */,
+				DF87508E2A63328A00D14F41 /* GalleryViewController.swift in Sources */,
 				DF25EEF32A632AF900EA8CC5 /* AppDelegate.swift in Sources */,
 				DF87508F2A633CE100D14F41 /* CatImage.swift in Sources */,
 				DF25EEF52A632AF900EA8CC5 /* SceneDelegate.swift in Sources */,
-				DF588DDD2A646EB90075BD5D /* File.swift in Sources */,
-				DFB724DA2A64508100AD0277 /* CatImageCellCollectionViewCell.swift in Sources */,
+				DFB724DA2A64508100AD0277 /* CatImgCollectionViewCell.swift in Sources */,
 				DF8750912A633D7B00D14F41 /* CatGalleryResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
