@@ -10,14 +10,15 @@
 import Foundation
 import Alamofire
 
-
+import Foundation
+import Alamofire
 
 class CatGalleryViewModel {
     private var catImages: [CatImage] = []
     
-    func fetchCatImages(completion: @escaping (Result<Void, Error>) -> Void) {
+    func fetchCatImages(section: String = "hot", sort: String = "viral", window: String = "day", page: Int = 1, showViral: Bool = true, showMature: Bool = false, albumPreviews: Bool = false, completion: @escaping (Result<Void, Error>) -> Void) {
         let clientId = "9d32f5daf5806b6"
-        let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
+        let apiUrl = "https://api.imgur.com/3/gallery/\(section)/\(sort)/\(window)/\(page)?showViral=\(showViral)&mature=\(showMature)&album_previews=\(albumPreviews)"
 
         guard let url = URL(string: apiUrl) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
@@ -52,5 +53,3 @@ class CatGalleryViewModel {
         return catImages[index].imageUrl
     }
 }
-
-
