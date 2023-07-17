@@ -13,6 +13,11 @@ import Alamofire
 class GalleryViewModel {
     private var imagensDeGatos: [ImagemDeGato] = []
     
+    // Adicione a função para adicionar imagens de teste
+    func adicionarImagensDeTeste(_ imagens: [ImagemDeGato]) {
+        imagensDeGatos += imagens
+    }
+    
     func buscarImagensDeGatos(pagina: Int, conclusao: @escaping (Result<Void, Error>) -> Void) {
         let clientId = "9d32f5daf5806b6"
         let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
