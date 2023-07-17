@@ -17,6 +17,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate {
     var isLoadingData = false
     var ongoingRequest: DataRequest?
     var loadingIndicator: UIActivityIndicatorView!
+    var loadingBackgroundView: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,26 +41,54 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate {
 
         NSLayoutConstraint.activate([
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingIndicator.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50) // Ajuste a posição do indicador de acordo com sua preferência
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor) // Centraliza o indicador de loading na tela
         ])
+    }
+
+    private func showLoadingBackgroundView() {
+        loadingBackgroundView = UIView(frame: view.bounds)
+        loadingBackgroundView?.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        loadingBackgroundView?.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingBackgroundView!)
+
+        NSLayoutConstraint.activate([
+            loadingBackgroundView!.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingBackgroundView!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            loadingBackgroundView!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingBackgroundView!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+
+    private func hideLoadingBackgroundView() {
+        loadingBackgroundView?.removeFromSuperview()
+        loadingBackgroundView = nil
     }
 
     private func fetchCatImages(pagina: Int) {
         isLoadingData = true
         ongoingRequest?.cancel() // Cancela qualquer requisição em andamento antes de fazer uma nova
-        loadingIndicator.startAnimating() // Inicia a animação do indicador de loading
-        viewModel.buscarImagensDeGatos(pagina: pagina) { [weak self] result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
+
+        // Mostra o indicador de loading e o fundo cinza transparente
+        loadingIndicator.startAnimating()
+        showLoadingBackgroundView()
+
+        // Adiciona um pequeno delay para tornar o loading mais perceptível
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+            self.viewModel.buscarImagensDeGatos(pagina: pagina) { [weak self] result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.collectionView.reloadData()
+                        self?.isLoadingData = false
+                        self?.loadingIndicator.stopAnimating() // Para a animação do indicador de loading
+                        self?.hideLoadingBackgroundView() // Esconde o fundo cinza transparente
+                    }
+                case .failure(let error):
+                    print("Erro ao buscar imagens de gatos: \(error)")
                     self?.isLoadingData = false
-                    self?.loadingIndicator.stopAnimating() // Para a animação do indicador de loading
+                    self?.loadingIndicator.stopAnimating() // Para a animação do indicador de loading em caso de erro também
+                    self?.hideLoadingBackgroundView() // Esconde o fundo cinza transparente em caso de erro também
                 }
-            case .failure(let error):
-                print("Erro ao buscar imagens de gatos: \(error)")
-                self?.isLoadingData = false
-                self?.loadingIndicator.stopAnimating() // Para a animação do indicador de loading em caso de erro também
             }
         }
     }
