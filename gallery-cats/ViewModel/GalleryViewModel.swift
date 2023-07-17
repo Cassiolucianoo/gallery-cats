@@ -5,55 +5,55 @@
 //  Created by cassio on 15/07/23.
 //
 //let clientId = "9d32f5daf5806b6"
-//let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"import Foundation
+//let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
 
 import Foundation
 import Alamofire
 
 class GalleryViewModel {
-    private var catImages: [CatImage] = []
+    private var imagensDeGatos: [ImagemDeGato] = []
 
-    func fetchCatImages(page: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+    func buscarImagensDeGatos(pagina: Int, conclusao: @escaping (Result<Void, Error>) -> Void) {
         let clientId = "9d32f5daf5806b6"
         let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
 
-        guard let url = URL(string: "\(apiUrl)&page=\(page)") else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+        guard let url = URL(string: "\(apiUrl)&page=\(pagina)") else {
+            conclusao(.failure(NSError(domain: "URL inválida", code: 0, userInfo: nil)))
             return
         }
 
-        var request = URLRequest(url: url)
-        request.addValue("Client-ID \(clientId)", forHTTPHeaderField: "Authorization")
+        var requisicao = URLRequest(url: url)
+        requisicao.addValue("Client-ID \(clientId)", forHTTPHeaderField: "Authorization")
 
-        AF.request(request).validate().responseData { response in
+        AF.request(requisicao).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 do {
-                    let decoder = JSONDecoder()
-                    let apiResponse = try decoder.decode(CatGalleryResponse.self, from: data)
+                    let decodificador = JSONDecoder()
+                    let respostaApi = try decodificador.decode(RespostaGaleriaGatos.self, from: data)
 
-                    let newImages = apiResponse.data.compactMap { imageData in
-                        if let image = imageData.images?.first, image.type == "image/jpeg" {
-                            return CatImage(link: image.link, type: image.type)
+                    let novasImagens = respostaApi.data.compactMap { dadosImagem in
+                        if let imagem = dadosImagem.images?.first, imagem.type == "image/jpeg" {
+                            return ImagemDeGato(link: imagem.link, type: imagem.type)
                         }
                         return nil
                     }
-                    self.catImages += newImages
-                    completion(.success(()))
+                    self.imagensDeGatos += novasImagens
+                    conclusao(.success(()))
                 } catch {
-                    completion(.failure(error))
+                    conclusao(.failure(error))
                 }
             case .failure(let error):
-                completion(.failure(error))
+                conclusao(.failure(error))
             }
         }
     }
 
-    func numberOfImages() -> Int {
-        return catImages.count
+    func numeroDeImagens() -> Int {
+        return imagensDeGatos.count
     }
 
-    func imageUrl(at index: Int) -> String {
-        return catImages[index].link
+    func urlImagem(at index: Int) -> String {
+        return imagensDeGatos[index].link
     }
 }

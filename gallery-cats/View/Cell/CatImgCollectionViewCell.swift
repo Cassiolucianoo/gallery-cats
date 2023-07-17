@@ -11,20 +11,20 @@ import AlamofireImage
 class CatImgCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 
-    func configure(with imageUrl: String) {
-        if let url = URL(string: imageUrl) {
+    func configurar(com urlImagem: String) {
+        if let url = URL(string: urlImagem) {
             imageView.af.setImage(withURL: url, completion: { response in
                 switch response.result {
                 case .success(let image):
-                    let desiredSize = CGSize(width: 100, height: 126)
-                    let resizedImage = image.af.imageAspectScaled(toFill: desiredSize)
-                    self.imageView.image = resizedImage
+                    let tamanhoDesejado = CGSize(width: 100, height: 126)
+                    let imagemRedimensionada = image.af.imageAspectScaled(toFill: tamanhoDesejado)
+                    self.imageView.image = imagemRedimensionada
                 case .failure(let error):
-                    print("Error loading image: \(url), error: \(error)")
+                    print("Erro ao carregar imagem: \(urlImagem), erro: \(error)")
                 }
             })
         } else {
-            print("Invalid URL")
+            print("URL inválida")
         }
     }
 }

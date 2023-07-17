@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct CatGalleryResponse: Codable {
-    let data: [CatImageData]
+struct RespostaGaleriaGatos: Codable {
+    let data: [DadosImagemDeGato]
 }
 
-struct CatImageData: Codable {
-    let images: [CatImage]?
+struct DadosImagemDeGato: Codable {
+    let images: [ImagemDeGato]?
 }
 
-struct CatImage: Codable {
+struct ImagemDeGato: Codable {
     let link: String
     let type: String
 }
