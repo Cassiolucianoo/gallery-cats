@@ -14,15 +14,17 @@ class CatImgCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-
     func configure(with imageUrl: String) {
-        print("Configurando célula com a imagem: \(imageUrl)")
         if let url = URL(string: imageUrl) {
-            // Use o método `af.setImage(withURL:)` para carregar a imagem da URL e configurar o UIImageView
-            imageView.af.setImage(withURL: url, completion:  { response in
+            // Carregue a imagem da URL e redimensione-a para o tamanho desejado
+            // Certifique-se de importar a biblioteca AlamofireImage para usar o método "af.setImage(withURL:)"
+            imageView.af.setImage(withURL: url, completion: { response in
                 switch response.result {
-                case .success:
-                    print("Imagem carregada com sucesso: \(url)")
+                case .success(let image):
+                    // Redimensione a imagem para o tamanho desejado
+                    let desiredSize = CGSize(width: 100, height: 126) // Defina o tamanho desejado aqui
+                    let resizedImage = image.af.imageAspectScaled(toFill: desiredSize)
+                    self.imageView.image = resizedImage
                 case .failure(let error):
                     print("Erro ao carregar imagem: \(url), erro: \(error)")
                 }
@@ -31,8 +33,7 @@ class CatImgCollectionViewCell: UICollectionViewCell {
             print("URL inválida")
         }
     }
-    
-    
+
     func loadImage(from url: URL?) {
             guard let url = url else {
                 print("URL inválida")
@@ -55,5 +56,3 @@ class CatImgCollectionViewCell: UICollectionViewCell {
                 }
         }
     }
-    
-    

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class GalleryViewController: UIViewController {
-
+   
     @IBOutlet weak var collectionView: UICollectionView!
     
     let MyCollectionViewCellId: String = "CatImageCellCollectionViewCell"
+
     let viewModel = GalleryViewModel()
 
     override func viewDidLoad() {
