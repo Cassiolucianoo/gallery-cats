@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-import Foundation
-
 struct CatGalleryResponse: Codable {
     let data: [CatImageData]
 }

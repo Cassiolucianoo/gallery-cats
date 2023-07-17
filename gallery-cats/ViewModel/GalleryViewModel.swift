@@ -13,11 +13,11 @@ import Alamofire
 class GalleryViewModel {
     private var catImages: [CatImage] = []
 
-    func fetchCatImages(completion: @escaping (Result<Void, Error>) -> Void) {
+    func fetchCatImages(page: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         let clientId = "9d32f5daf5806b6"
         let apiUrl = "https://api.imgur.com/3/gallery/search/?q=cats"
 
-        guard let url = URL(string: apiUrl) else {
+        guard let url = URL(string: "\(apiUrl)&page=\(page)") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
             return
         }
@@ -31,12 +31,14 @@ class GalleryViewModel {
                 do {
                     let decoder = JSONDecoder()
                     let apiResponse = try decoder.decode(CatGalleryResponse.self, from: data)
-                    self.catImages = apiResponse.data.compactMap { imageData in
+
+                    let newImages = apiResponse.data.compactMap { imageData in
                         if let image = imageData.images?.first, image.type == "image/jpeg" {
                             return CatImage(link: image.link, type: image.type)
                         }
                         return nil
                     }
+                    self.catImages += newImages
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))
